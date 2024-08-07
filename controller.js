@@ -39,7 +39,7 @@ const applicationController = async (req, res) => {
 
     const mailOptions = {
       from: process.env.APP_GMAIL,
-      to: "matveygemot@gmail.com",
+      to: "vlasov.production.doc@mail.ru",
       subject: "VLASOV PRODUCTION",
       text: `Имя: ${req.body.name}
 Телефон: ${req.body.number}
