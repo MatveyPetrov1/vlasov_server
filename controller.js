@@ -1,4 +1,3 @@
-const applicationModel = require("./model");
 const { validationResult } = require("express-validator");
 const nodemailer = require("nodemailer");
 const video1 = require("./videos/video1.mp4");
@@ -16,21 +15,6 @@ const applicationController = async (req, res) => {
 
     const { name, number, service, city } = req.body;
 
-    const doc = new applicationModel({
-      name,
-      number,
-      service,
-      city,
-    });
-
-    const application = await doc.save();
-
-    if (!application) {
-      return res.status(400).json({
-        message: "Ошибка при отправке заявки",
-      });
-    }
-
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
@@ -43,10 +27,10 @@ const applicationController = async (req, res) => {
       from: process.env.APP_GMAIL,
       to: "vlasov.production.doc@mail.ru",
       subject: "VLASOV PRODUCTION",
-      text: `Имя: ${req.body.name}
-Телефон: ${req.body.number}
-Услуга: ${req.body.service}
-Город: ${req.body.city}`,
+      text: `Имя: ${name}
+Телефон: ${number}
+Услуга: ${service}
+Город: ${city}`,
     };
 
     transporter.sendMail(mailOptions, (err) => {
