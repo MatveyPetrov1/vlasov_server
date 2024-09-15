@@ -14,7 +14,7 @@ app.use(cors());
 
 const start = async () => {
   app.post("/", validation, applicationController);
-  app.get("/video/:id", videoController);
+  app.get("/video/:fileName", videoController);
 
   app.listen(PORT, () => {
     console.log("Server is started");

@@ -1,7 +1,8 @@
 const { validationResult } = require("express-validator");
 const nodemailer = require("nodemailer");
-const video1 = require("./videos/video1.mp4");
-const video2 = require("./videos/video2.mp4");
+const path = require("path");
+
+const videosDirectory = path.join(__dirname, "videos");
 
 const applicationController = async (req, res) => {
   try {
@@ -51,19 +52,18 @@ const applicationController = async (req, res) => {
 };
 
 const videoController = (req, res) => {
-  // const id = req.params.id;
+  const { fileName } = req.params;
+  const filePath = path.join(videosDirectory, fileName);
 
-  console.log(req.params.id);
-
-  // try {
-  //   if (id === 1) {
-  //     return res.send(video1);
-  //   } else if (id === 2) {
-  //     return res.send(video2);
-  //   }
-  // } catch (err) {
-  //   console.log(err);
-  // }
+  try {
+    res.sendFile(filePath, (err) => {
+      if (err) {
+        return res.status(err.status).end();
+      }
+    });
+  } catch (err) {
+    console.log(err);
+  }
   return res.json({
     message: "success",
   });
