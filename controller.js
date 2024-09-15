@@ -56,7 +56,7 @@ const videoController = (req, res) => {
   const filePath = path.join(videosDirectory, fileName);
 
   try {
-    res.sendFile(filePath, (err) => {
+    return res.sendFile(filePath, (err) => {
       if (err) {
         return res.status(err.status).end();
       }
@@ -64,9 +64,6 @@ const videoController = (req, res) => {
   } catch (err) {
     console.log(err);
   }
-  return res.json({
-    message: "success",
-  });
 };
 
 module.exports = { applicationController, videoController };
