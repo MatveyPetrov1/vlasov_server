@@ -3,7 +3,7 @@ require("dotenv").config();
 const mongoose = require("mongoose");
 const cors = require("cors");
 
-const applicationController = require("./controller.js");
+const { applicationController, videoController } = require("./controller.js");
 const validation = require("./validation.js");
 
 const app = express();
@@ -21,6 +21,7 @@ const start = async () => {
     .catch((err) => console.log(err));
 
   app.post("/", validation, applicationController);
+  app.get("/video/:id", videoController);
 
   app.listen(PORT, () => {
     console.log("Server is started");

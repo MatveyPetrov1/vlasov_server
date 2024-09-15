@@ -1,6 +1,8 @@
 const applicationModel = require("./model");
 const { validationResult } = require("express-validator");
 const nodemailer = require("nodemailer");
+const video1 = require("./videos/video1.mp4");
+const video2 = require("./videos/video2.mp4");
 
 const applicationController = async (req, res) => {
   try {
@@ -64,4 +66,23 @@ const applicationController = async (req, res) => {
   }
 };
 
-module.exports = applicationController;
+const videoController = (req, res) => {
+  // const id = req.params.id;
+
+  console.log(req.params.id);
+
+  // try {
+  //   if (id === 1) {
+  //     return res.send(video1);
+  //   } else if (id === 2) {
+  //     return res.send(video2);
+  //   }
+  // } catch (err) {
+  //   console.log(err);
+  // }
+  return res.json({
+    message: "success",
+  });
+};
+
+module.exports = { applicationController, videoController };
