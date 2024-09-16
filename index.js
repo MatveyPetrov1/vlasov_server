@@ -7,7 +7,6 @@ const {
   videoController,
   imageController,
 } = require("./controller.js");
-const validation = require("./validation.js");
 
 const app = express();
 
@@ -17,7 +16,7 @@ app.use(express.json());
 app.use(cors());
 
 const start = async () => {
-  app.post("/", validation, applicationController);
+  app.post("/", applicationController);
   app.get("/videos/:fileName", videoController);
   app.get("/images/:fileName", imageController);
 
