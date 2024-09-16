@@ -9,7 +9,7 @@ const applicationController = async (req, res) => {
   try {
     const result = validationResult(req);
 
-    if (!result.isEmpty) {
+    if (!result.isEmpty()) {
       return res.status(400).json({
         message: "Неправильный формат заявки",
       });
