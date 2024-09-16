@@ -42,7 +42,9 @@ const applicationController = async (req, res) => {
       }
     });
 
-    res.json(application);
+    return res.status(200).json({
+      message: "success",
+    });
   } catch (err) {
     console.log(err);
     res.status(400).json({
