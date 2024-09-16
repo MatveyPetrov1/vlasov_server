@@ -3,6 +3,7 @@ const nodemailer = require("nodemailer");
 const path = require("path");
 
 const videosDirectory = path.join(__dirname, "videos");
+const imagesDirectory = path.join(__dirname, "images");
 
 const applicationController = async (req, res) => {
   try {
@@ -54,10 +55,10 @@ const applicationController = async (req, res) => {
 };
 
 const videoController = (req, res) => {
-  const { fileName } = req.params;
-  const filePath = path.join(videosDirectory, fileName);
-
   try {
+    const { fileName } = req.params;
+    const filePath = path.join(videosDirectory, fileName);
+
     return res.sendFile(filePath, (err) => {
       if (err) {
         return res.status(err.status).end();
@@ -68,4 +69,19 @@ const videoController = (req, res) => {
   }
 };
 
-module.exports = { applicationController, videoController };
+const imageController = (req, res) => {
+  try {
+    const { fileName } = req.params;
+    const filePath = path.join(imagesDirectory, fileName);
+
+    return res.sendFile(filePath, (err) => {
+      if (err) {
+        return res.status(err.status).end();
+      }
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+module.exports = { applicationController, videoController, imageController };

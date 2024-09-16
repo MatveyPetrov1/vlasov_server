@@ -2,7 +2,11 @@ const express = require("express");
 require("dotenv").config();
 const cors = require("cors");
 
-const { applicationController, videoController } = require("./controller.js");
+const {
+  applicationController,
+  videoController,
+  imageController,
+} = require("./controller.js");
 const validation = require("./validation.js");
 
 const app = express();
@@ -14,7 +18,8 @@ app.use(cors());
 
 const start = async () => {
   app.post("/", validation, applicationController);
-  app.get("/video/:fileName", videoController);
+  app.get("/videos/:fileName", videoController);
+  app.get("/images/:fileName", imageController);
 
   app.listen(PORT, () => {
     console.log("Server is started");
