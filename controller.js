@@ -52,7 +52,7 @@ const videoController = (req, res) => {
 
     return res.sendFile(filePath, (err) => {
       if (err) {
-        return res.status(err.status).end();
+        return res.json({ message: err, err });
       }
     });
   } catch (err) {
